@@ -28,4 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/halamanutama', function () {
+    return view('halamanutama'); // Ganti 'nama_halaman' dengan nama file di folder views tanpa '.blade.php'
+});
+
+
 require __DIR__.'/auth.php';

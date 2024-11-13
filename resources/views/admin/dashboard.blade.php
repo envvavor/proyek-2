@@ -106,7 +106,7 @@
                 </a>
                 <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
                     <span class="material-icons-outlined mr-2">file_copy</span>
-                    Another menu item
+                    Lainnya
                     <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
                 </a>
             </div>
