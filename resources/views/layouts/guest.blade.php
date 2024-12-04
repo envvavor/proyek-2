@@ -22,6 +22,10 @@
                 </a>
             </div>
 
+            <div>
+                <img src="{{ asset('img/logotkj.png') }}" class="h-24 mx-auto" alt="Logo" />
+            </div>
+
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>

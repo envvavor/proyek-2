@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">    
                     <a href="{{ route('dashboard') }}">
                         <!-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> -->
-                         <h1>SMKN 2 INDRAMAYU</h1>
+                        <img src="{{ asset('img/logotkj.png') }}" class="h-12" alt="Logo" />
                     </a>
                 </div>
 

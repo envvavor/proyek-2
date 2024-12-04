@@ -136,6 +136,9 @@
                     <h2 class="text-4xl md:text-5xl text-blue-900">
                         Selamat Datang <br><strong>{{ Auth::user()->name }}</strong>
                     </h2>
+                    <h4 class="text-4xl md:text-5xl text-blue-900">
+                        kelas {{ Auth::user()->kelas }}
+                    </h4>
                     <!-- <span class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-indigo-800">
                         01:51
                     </span> -->

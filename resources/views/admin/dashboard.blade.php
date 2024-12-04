@@ -71,6 +71,7 @@
     </style>
 </h>
 <body class="bg-indigo-50 min-h-screen overflow-x-hidden">
+
     <div class="overlay fixed inset-0 bg-indigo-900/50 z-40 hidden opacity-0 transition-opacity duration-300"></div>
     
     <!-- <header class="fixed w-full bg-white text-indigo-800 z-50 shadow-lg animate-slide-down">
@@ -91,94 +92,86 @@
         </div>
     </header> -->
 
-    <div class="pt-16 max-w-7xl mx-auto flex">
-        <aside class="sidebar fixed lg:static w-[240px] bg-indigo-50 h-[calc(100vh-4rem)] lg:h-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-45 overflow-y-auto p-4">
-            <div class="bg-white rounded-xl shadow-lg mb-6 p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                    <span class="material-icons-outlined mr-2">dashboard</span>
-                    Home
-                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                </a>
-                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                    <span class="material-icons-outlined mr-2">tune</span>
-                    Menu Admin
-                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                </a>
-                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                    <span class="material-icons-outlined mr-2">file_copy</span>
-                    Lainnya
-                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                </a>
-            </div>
+        <div class="pt-16 max-w-7xl mx-auto flex">
+            <aside class="sidebar fixed lg:static w-[240px] bg-indigo-50 h-[calc(100vh-4rem)] lg:h-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-45 overflow-y-auto p-4">
+                <div class="bg-white rounded-xl shadow-lg mb-6 p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                    <!-- Home Link -->
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                        <span class="material-icons-outlined mr-2">dashboard</span>
+                        Home
+                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                    </a>
+                    <!-- Menu Admin Link -->
+                    <a href="{{ route('profile.edit') }}" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                        <span class="material-icons-outlined mr-2">tune</span>
+                        Profile Admin
+                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                    </a>
 
-            <!-- <div class="bg-white rounded-xl shadow-lg p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                    <span class="material-icons-outlined mr-2">face</span>
-                    Profile
-                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                </a>
-                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                    <span class="material-icons-outlined mr-2">settings</span>
-                    Settings
-                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                </a>
-                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                    <span class="material-icons-outlined mr-2">power_settings_new</span>
-                    Log out
-                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                </a>
-            </div> -->
-        </aside>
+                    <!-- Lainnya Link -->
+                    <a href="{{ url('/halamanutama') }}" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                        <span class="material-icons-outlined mr-2">file_copy</span>
+                        Keluar
+                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                    </a>
+                </div>
 
+                <!-- <div class="bg-white rounded-xl shadow-lg p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                    <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                        <span class="material-icons-outlined mr-2">face</span>
+                        Profile
+                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                        <span class="material-icons-outlined mr-2">settings</span>
+                        Settings
+                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                        <span class="material-icons-outlined mr-2">power_settings_new</span>
+                        Log out
+                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                    </a>
+                </div> -->
+            </aside>
+            
         <main class="flex-1 p-4">
             <div class="flex flex-col lg:flex-row gap-4 mb-6">
+                <!-- Card 1 - Welcome -->
                 <div class="flex-1 bg-indigo-100 border border-indigo-200 rounded-xl p-6 animate-fade-in">
                     <h2 class="text-4xl md:text-5xl text-blue-900">
                         Selamat Datang <br><strong>{{ Auth::user()->name }}</strong>
                     </h2>
-                    <!-- <span class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-indigo-800">
-                        01:51
-                    </span> -->
                 </div>
 
+                <!-- Card 2 - Tugas Tersisa -->
                 <div class="flex-1 bg-blue-100 border border-blue-200 rounded-xl p-6 animate-fade-in">
                     <h2 class="text-4xl md:text-5xl text-blue-900">
-                        Tugas Tersisa<br><strong>2</strong>
+                        Jumlah Pengguna<br><strong>{{ $userCount }}</strong>
                     </h2>
                     <a href="#" class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
-                        Lihat Tugas
+                        Lihat Semua
                     </a>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-gradient-to-b from-indigo-100 to-indigo-800 rounded-xl shadow-lg p-6 h-64 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up" style="animation-delay: 0.1s">
-                    <h3 class="text-xl font-bold text-indigo-800">Pemrograman Dasar</h3>
-                </div>
-                <div class="bg-gradient-to-b from-indigo-100 to-indigo-800 rounded-xl shadow-lg p-6 h-64 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up" style="animation-delay: 0.2s">
-                    <h3 class="text-xl font-bold text-indigo-800">Matematika</h3>
-                </div>
-                <div class="bg-gradient-to-b from-indigo-100 to-indigo-800 rounded-xl shadow-lg p-6 h-64 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up" style="animation-delay: 0.3s">
-                    <h3 class="text-xl font-bold text-indigo-800">Bahasa Inggris</h3>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-gradient-to-b from-indigo-100 to-indigo-800 rounded-xl shadow-lg p-6 h-64 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up" style="animation-delay: 0.1s">
-                    <h3 class="text-xl font-bold text-indigo-800">Jaringan</h3>
-                </div>
-                <div class="bg-gradient-to-b from-indigo-100 to-indigo-800 rounded-xl shadow-lg p-6 h-64 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up" style="animation-delay: 0.2s">
-                    <h3 class="text-xl font-bold text-indigo-800">Bahasa Indonesia</h3>
-                </div>
-                <div class="bg-gradient-to-b from-indigo-100 to-indigo-800 rounded-xl shadow-lg p-6 h-64 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up" style="animation-delay: 0.3s">
-                    <h3 class="text-xl font-bold text-indigo-800">Olahraga</h3>
+            <!-- Menu CRUD -->
+            <div class="bg-indigo-50 animate-fade-in duration-300 animate-slide-up">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
+                    <div class="bg-white shadow-sm sm:rounded-lg p-6">
+                        <h3 class="font-semibold text-lg mb-4">Manage Data</h3>
+                        <ul>
+                            <li>
+                                <a href="{{ route('users.index') }}" 
+                                class="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                                    Manage Users
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </main>
-    </div>
-
     <script>
         // Mobile menu functionality
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
