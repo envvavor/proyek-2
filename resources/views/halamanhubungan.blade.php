@@ -158,7 +158,7 @@ use Illuminate\Support\Facades\Route;
             <div class="flex flex-row items-center justify-between px-4 mx-auto max-w-screen-xl text-center h-20 bg-[#475569] w-full rounded-lg">
                 <img src="{{ asset('img/logotkj.png') }}" class="h-24 sm:h-40" alt="Logo" />
                 <p class="mb-4 text-1xl font-bold tracking-tight leading-none text-white md:text-2xl lg:text-4xl">
-                    Informasi Kontak, Kritik & Saran
+                    Kerja Sama Tempat Dunia Usaha dan Dunia Industri
                 </p>
             </div>
         </div>

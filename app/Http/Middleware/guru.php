@@ -33,7 +33,8 @@ class guru
         }
         //Murid
         elseif ($userRole == 3) {
-            return redirect()->route('dashboard');
+            return redirect()->route('murid.dashboard');
         }
+        return redirect()->route('login')->with('error', 'Akses tidak diizinkan.');
     }
 }

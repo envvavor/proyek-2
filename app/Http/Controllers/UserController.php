@@ -7,9 +7,16 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
+        $query = User::query();
+
+        // Filter berdasarkan role jika diberikan
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+
+        $users = $query->get();
         return view('users.index', compact('users'));
     }
 
@@ -19,25 +26,25 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'kelas' => ['nullable', 'string', 'max:255'],
-        'role' => ['required', 'integer', 'in:1,2,3'],  // Memperbaiki validasi
-        'password' => 'required|min:8',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'kelas' => ['nullable', 'string', 'max:255'],
+            'role' => ['required', 'integer', 'in:1,2,3'],  // Memperbaiki validasi
+            'password' => 'required|min:8',
+        ]);
 
-    User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'kelas'=> $request->kelas,
-        'role' => $request->role,
-        'password' => bcrypt($request->password),
-    ]);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'kelas' => $request->kelas,
+            'role' => $request->role,
+            'password' => bcrypt($request->password),
+        ]);
 
-    return redirect()->route('users.index')->with('success', 'User created successfully.');
-}
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
+    }
 
     public function edit(User $user)
     {
@@ -45,32 +52,32 @@ class UserController extends Controller
     }
 
     public function update(Request $request, User $user)
-{
-    // Validasi input
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-        'kelas' => ['nullable', 'string', 'max:255'],
-        'role' => ['required', 'integer', 'in:1,2,3'],  // Memperbaiki validasi
-        'password' => 'nullable|string|min:8|confirmed',  // Password adalah opsional
-    ]);
+    {
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'kelas' => ['nullable', 'string', 'max:255'],
+            'role' => ['required', 'integer', 'in:1,2,3'],  // Memperbaiki validasi
+            'password' => 'nullable|string|min:8|confirmed',  // Password adalah opsional
+        ]);
 
-    // Perbarui data pengguna
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->kelas = $request->kelas;
-    $user->role = $request->role;
+        // Perbarui data pengguna
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->kelas = $request->kelas;
+        $user->role = $request->role;
 
-    // Jika password baru diinputkan
-    if ($request->filled('password')) {
-        $user->password = bcrypt($request->password); // Hash password baru
+        // Jika password baru diinputkan
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password); // Hash password baru
+        }
+
+        $user->save();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
-
-    $user->save();
-
-    // Redirect dengan pesan sukses
-    return redirect()->route('users.index')->with('success', 'User updated successfully.');
-}
 
     public function destroy(User $user)
     {
@@ -83,8 +90,4 @@ class UserController extends Controller
         $userCount = User::count(); // Jumlah user
         return view('admin.dashboard', compact('userCount'));
     }
-
-    
 }
-
-

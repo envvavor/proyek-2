@@ -1,12 +1,21 @@
 <?php
 
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\SubmissionController;
+use App\Http\Controllers\SubjectController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Dashboard Murid
+Route::get('/murid/dashboard', function () {
+    return view('murid.dashboard');
+})->middleware(['auth', 'verified', 'menumurid'])->name('murid.dashboard');
 
 //Dashboard Siswa
 Route::get('/dashboard', function () {
@@ -56,5 +65,23 @@ Route::get('/halamangaleri', function () {
 Route::resource('users', UserController::class)->middleware(['auth']);
 
 Route::get('/admin/dashboard', [UserController::class, 'hitung'])->name('admin.dashboard');
+
+Route::get('/assignments/create', [AssignmentController::class, 'create'])->name('assignments.create');
+Route::post('/assignments', [AssignmentController::class, 'store'])->name('assignments.store');
+Route::get('/assignments', [AssignmentController::class, 'index'])->name('assignments.index');
+
+Route::get('assignments/{id}/edit', [AssignmentController::class, 'edit'])->name('assignments.edit');
+Route::put('assignments/{id}', [AssignmentController::class, 'update'])->name('assignments.update');
+Route::delete('assignments/{id}', [AssignmentController::class, 'destroy'])->name('assignments.destroy');
+
+Route::get('subjects/{id}', [SubjectController::class, 'show'])->name('subjects.show');
+
+Route::get('/guru/dashboard', [SubjectController::class, 'index'])->name('guru.dashboard');
+Route::get('/guru/dashboard', [ClassController::class, 'index'])->name('guru.dashboard');
+
+Route::get('/murid/dashboard', [SubjectController::class, 'index'])->name('murid.dashboard');
+
+Route::get('classes/{id}', [ClassController::class, 'show'])->name('classes.show');
+
 
 require __DIR__.'/auth.php';

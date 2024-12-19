@@ -49,13 +49,17 @@
                     <!-- role -->
                     <div>
                         <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
-                        <input type="text" name="role" id="role" 
-                               value="{{ old('role') }}" 
-                               class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <select id="role" name="role" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" required>
+                            <option value="" disabled selected>Pilih role</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Guru</option>
+                            <option value="3">Murid</option>
+                        </select>
                         @error('role')
                             <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                         @enderror
                     </div>
+
                     
 
                     <!-- Password -->

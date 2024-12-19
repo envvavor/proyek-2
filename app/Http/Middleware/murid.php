@@ -35,5 +35,6 @@ class murid
         elseif ($userRole == 3) {
             return $next($request);
         }
+        return redirect()->route('login')->with('error', 'Akses tidak diizinkan.');
     }
 }

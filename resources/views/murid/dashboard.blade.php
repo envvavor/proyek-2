@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard Guru') }}
+            {{ __('Dashboard Siswa') }}
         </h2>
     </x-slot>
 
@@ -94,25 +94,21 @@
     <div class="pt-16 max-w-7xl mx-auto flex">
         <aside class="sidebar fixed lg:static w-[240px] bg-indigo-50 h-[calc(100vh-4rem)] lg:h-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-45 overflow-y-auto p-4">
             <div class="bg-white rounded-xl shadow-lg mb-6 p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                    <!-- Home Link -->
-                    <a href="{{ route('guru.dashboard') }}" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                        <span class="material-icons-outlined mr-2">dashboard</span>
-                        Home
-                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                    </a>
-                    <!-- Menu Admin Link -->
-                    <a href="{{ route('profile.edit') }}" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                        <span class="material-icons-outlined mr-2">tune</span>
-                        Profile Guru
-                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                    </a>
-
-                    <!-- Lainnya Link -->
-                    <a href="{{ url('/halamanutama') }}" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                        <span class="material-icons-outlined mr-2">file_copy</span>
-                        Keluar
-                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                    </a>
+                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                    <span class="material-icons-outlined mr-2">dashboard</span>
+                    Home
+                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                    <span class="material-icons-outlined mr-2">tune</span>
+                    Menu Siswa
+                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                </a>
+                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                    <span class="material-icons-outlined mr-2">file_copy</span>
+                    Another menu item
+                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                </a>
             </div>
 
             <!-- <div class="bg-white rounded-xl shadow-lg p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -140,34 +136,31 @@
                     <h2 class="text-4xl md:text-5xl text-blue-900">
                         Selamat Datang <br><strong>{{ Auth::user()->name }}</strong>
                     </h2>
+                    <h4 class="text-4xl md:text-5xl text-blue-900">
+                        kelas {{ Auth::user()->kelas }}
+                    </h4>
                     <!-- <span class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-indigo-800">
                         01:51
                     </span> -->
                 </div>
 
                 <div class="flex-1 bg-blue-100 border border-blue-200 rounded-xl p-6 animate-fade-in">
-                    <!-- <h2 class="text-4xl md:text-5xl text-blue-900">
-                        Tugas Terkumpul<br><strong>2</strong>
-                    </h2> -->
-                    <a href="{{ route('assignments.index') }}" class="inline-block px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
-                        Lihat Semua Tugas
-                    </a>
-                    <br>
-                    <a href="{{ route('assignments.create') }}" class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
-                        Buat Tugas
+                    <h2 class="text-4xl md:text-5xl text-blue-900">
+                        Tugas Tersisa<br><strong>2</strong>
+                    </h2>
+                    <a href="#" class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
+                        Lihat Tugas
                     </a>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                @foreach ($classes as $class)
+                @foreach ($subjects as $subject)
                     <div class="bg-gradient-to-b from-indigo-100 to-indigo-800 rounded-xl shadow-lg p-6 h-64 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up" style="animation-delay: 0.1s">
-                        <a href="{{ route('classes.show', $class->id) }}" class="text-xl font-bold text-indigo-800 hover:text-white hover:border-solid">Kelas : {{ $class->name }}</a>
+                        <a href="{{ route('subjects.show', $subject->id) }}" class="text-xl font-bold text-indigo-800 hover:text-white hover:border-solid">{{ $subject->name }}</a>
                     </div>
                 @endforeach
             </div>
-
-            <br>
         </main>
     </div>
 
@@ -203,6 +196,5 @@
     </script>
 </body>
 </html>
-
     
 </x-app-layout>
