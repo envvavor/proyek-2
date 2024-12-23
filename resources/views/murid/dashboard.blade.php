@@ -94,22 +94,26 @@
     <div class="pt-16 max-w-7xl mx-auto flex">
         <aside class="sidebar fixed lg:static w-[240px] bg-indigo-50 h-[calc(100vh-4rem)] lg:h-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-45 overflow-y-auto p-4">
             <div class="bg-white rounded-xl shadow-lg mb-6 p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                    <span class="material-icons-outlined mr-2">dashboard</span>
-                    Home
-                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                </a>
-                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                    <span class="material-icons-outlined mr-2">tune</span>
-                    Menu Siswa
-                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                </a>
-                <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
-                    <span class="material-icons-outlined mr-2">file_copy</span>
-                    Another menu item
-                    <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
-                </a>
-            </div>
+                    <!-- Home Link -->
+                    <a href="{{ route('murid.dashboard') }}" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                        <span class="material-icons-outlined mr-2">dashboard</span>
+                        Home
+                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                    </a>
+                    <!-- Menu Admin Link -->
+                    <a href="{{ route('profile.edit') }}" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                        <span class="material-icons-outlined mr-2">tune</span>
+                        Profile Murid
+                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                    </a>
+
+                    <!-- Lainnya Link -->
+                    <a href="{{ url('/halamanutama') }}" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
+                        <span class="material-icons-outlined mr-2">file_copy</span>
+                        Keluar
+                        <span class="material-icons-outlined ml-auto">keyboard_arrow_right</span>
+                    </a>
+                </div>
 
             <!-- <div class="bg-white rounded-xl shadow-lg p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                 <a href="#" class="flex items-center text-gray-600 hover:text-indigo-800 py-4 transition-all duration-300 hover:translate-x-1">
@@ -137,7 +141,7 @@
                         Selamat Datang <br><strong>{{ Auth::user()->name }}</strong>
                     </h2>
                     <h4 class="text-4xl md:text-5xl text-blue-900">
-                        kelas {{ Auth::user()->kelas }}
+                        kelas {{ Auth::user()->class->name }}
                     </h4>
                     <!-- <span class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-indigo-800">
                         01:51
@@ -146,10 +150,10 @@
 
                 <div class="flex-1 bg-blue-100 border border-blue-200 rounded-xl p-6 animate-fade-in">
                     <h2 class="text-4xl md:text-5xl text-blue-900">
-                        Tugas Tersisa<br><strong>2</strong>
+                        Tugas Tersisa<br><strong>{{ $pendingAssignmentsCount }}</strong>
                     </h2>
-                    <a href="#" class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
-                        Lihat Tugas
+                    <a href="{{ route('submissions.index') }}" class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
+                        Lihat Semua Tugas
                     </a>
                 </div>
             </div>

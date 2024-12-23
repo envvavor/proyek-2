@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'kelas',
+        'class_id',
         'role',
         'password',
     ];
@@ -48,10 +49,11 @@ class User extends Authenticatable
         ];
     }
 
-    public function classes()
+    public function class()
     {
-        return $this->belongsToMany(ClassModel::class, 'class_user');
+        return $this->belongsTo(ClassModel::class, 'class_id');
     }
+
 
     public function assignments()
     {

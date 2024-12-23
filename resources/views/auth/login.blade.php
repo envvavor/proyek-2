@@ -4,7 +4,11 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg shadow-lg p-6 mb-6">
+            <h1 class="text-3xl font-extrabold mb-4 leading-tight tracking-tight text-white md:text-4xl text-center">
+            Welcome Back to Your E-Learning Portal
+            </h1>
+        </div>
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

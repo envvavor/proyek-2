@@ -12,7 +12,7 @@ class ClassModel extends Model
     protected $table = 'classes'; 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'class_user');
+        return $this->hasMany(User::class, 'class_id'); // Relasi ke model User
     }
 
     public function assignments()

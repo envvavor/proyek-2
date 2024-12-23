@@ -42,13 +42,22 @@ use Illuminate\Support\Facades\Route;
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
                 <a class="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="{{ asset('img/logotkj.png') }}" class="h-8" alt="Logo" />
-                    <span class="self-center text-1xl font-semibold whitespace-nowrap dark:text-white">TKJ SMKN 2 Indramayu</span>
+                    <span class="self-center text-1xl font-semibold whitespace-nowrap dark:text-white">TJKT SMKN 2 Indramayu</span>
                 </a>
                 <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                    @if (Route::has('login'))
+                @if (Route::has('login'))
                         @auth
+                            @php
+                                $role = auth()->user()->role; // Ambil peran pengguna
+                                $dashboardUrl = match($role) {
+                                    1 => '/admin/dashboard', // Admin
+                                    2 => '/guru/dashboard',  // Guru
+                                    3 => '/murid/dashboard', // Murid
+                                    default => '/dashboard', // Default jika peran tidak dikenali
+                                };
+                            @endphp
                             <a
-                                href="{{ url('/dashboard') }}"
+                                href="{{ url($dashboardUrl) }}"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 text-center me-2 mb-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             >
                                 Dashboard
@@ -140,9 +149,9 @@ use Illuminate\Support\Facades\Route;
         class="bg-center bg-cover bg-no-repeat bg-gray-200 bg-blend-multiply h-screen w-full rounded-b-xl" 
         style="background-image: url('{{ asset('img/bg-awal.png') }}');">
         <div class="flex flex-col items-center justify-center px-4 mx-auto max-w-screen-xl text-center h-full animate-slide-up">
-            <img src="{{ asset('img/logotkj.png') }}" class="h-24 mx-auto mb-6 animate-slide-up-delay" alt="Logo" />
+            <img src="{{ asset('img/logotkj.png') }}" class="h-24 md:h-32 mx-auto mb-6 animate-slide-up-delay" alt="Logo" />
             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl animate-slide-up-delay">
-                Teknik Komputer & Jaringan
+                Teknik Jaringan Komputer dan Telekomunikasi
             </h1>
             <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48 animate-slide-up-delay">
                 SMK Negeri 2 Indramayu
@@ -170,8 +179,8 @@ use Illuminate\Support\Facades\Route;
 
     <section class="relative bg-[#475569] py-20 flex justify-center items-center">
         <div href="#" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-lg md:flex-row md:max-w-6xl">
-            <div class="w-full md:w-1/2 h-96 md:h-auto">
-                <img class="object-cover w-full h-full rounded-lg ml-0 sm:ml-2" src="{{ asset('img/bg-awal.png') }}" alt="">
+            <div class="w-full md:w-1/2 h-90 md:h-full">
+                <img class="object-cover w-full h-full rounded-lg ml-0 sm:ml-2" src="{{ asset('img/image8.jpg') }}" alt="">
             </div>
             <div class="flex flex-col justify-between p-8 leading-normal w-full md:w-1/2">
                 <h5 class="mb-4 text-4xl font-bold tracking-tight text-gray-900">Foto Siswa & Siswi pada Saat Studi Banding</h5>
@@ -206,11 +215,11 @@ use Illuminate\Support\Facades\Route;
             <!-- Card 1 -->
             <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/bg-awal.png') }}"/>
+                    <img class="rounded-t-lg" src="{{ asset('img/image8.jpg') }}"/>
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Judul Kartu</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
                     </a>
                 </div>
             </div>
@@ -218,11 +227,11 @@ use Illuminate\Support\Facades\Route;
             <!-- Card 2 -->
             <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/bg-awal.png') }}"/>
+                    <img class="rounded-t-lg" src="{{ asset('img/image9.jpg') }}"/>
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Judul Kartu</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
                     </a>
                 </div>
             </div>
@@ -230,11 +239,11 @@ use Illuminate\Support\Facades\Route;
             <!-- Card 3 -->
             <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/bg-awal.png') }}"/>
+                    <img class="rounded-t-lg" src="{{ asset('img/image10.jpg') }}"/>
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Judul Kartu</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
                     </a>
                 </div>
             </div>
@@ -242,11 +251,11 @@ use Illuminate\Support\Facades\Route;
             <!-- Card 1 -->
             <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/bg-awal.png') }}"/>
+                    <img class="rounded-t-lg" src="{{ asset('img/image11.jpg') }}"/>
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Judul Kartu</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
                     </a>
                 </div>
             </div>
@@ -254,11 +263,11 @@ use Illuminate\Support\Facades\Route;
             <!-- Card 2 -->
             <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/bg-awal.png') }}"/>
+                    <img class="rounded-t-lg" src="{{ asset('img/image8.jpg') }}"/>
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Judul Kartu</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
                     </a>
                 </div>
             </div>
@@ -266,11 +275,83 @@ use Illuminate\Support\Facades\Route;
             <!-- Card 3 -->
             <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/bg-awal.png') }}"/>
+                    <img class="rounded-t-lg" src="{{ asset('img/image9.jpg') }}"/>
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Judul Kartu</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
+                    </a>
+                </div>
+            </div>
+
+                        <!-- Card 1 -->
+                        <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ asset('img/image8.jpg') }}"/>
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ asset('img/image9.jpg') }}"/>
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ asset('img/image10.jpg') }}"/>
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 1 -->
+            <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ asset('img/image11.jpg') }}"/>
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ asset('img/image8.jpg') }}"/>
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ asset('img/image9.jpg') }}"/>
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Praktik Dunia Kerja Industri</h5>
                     </a>
                 </div>
             </div>

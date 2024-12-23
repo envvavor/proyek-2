@@ -34,7 +34,7 @@
                         <table class="table-auto w-full border-collapse border border-gray-300">
                             <thead>
                                 <tr class="bg-gray-100">
-                                    <th class="border border-gray-300 px-4 py-2">#</th>
+                                    <th class="border border-gray-300 px-4 py-2">No</th>
                                     <th class="border border-gray-300 px-4 py-2">Name</th>
                                     <th class="border border-gray-300 px-4 py-2">Email</th>
                                     <th class="border border-gray-300 px-4 py-2">Kelas</th>
@@ -48,7 +48,7 @@
                                         <td class="border border-gray-300 px-4 py-2 text-center">{{ $loop->iteration }}</td>
                                         <td class="border border-gray-300 px-4 py-2">{{ $user->name }}</td>
                                         <td class="border border-gray-300 px-4 py-2">{{ $user->email }}</td>
-                                        <td class="border border-gray-300 px-4 py-2">{{ $user->kelas ?? '-' }}</td>
+                                        <td class="border border-gray-300 px-4 py-2">{{ $user->class->name ?? '-' }}</td>
                                         <td class="border border-gray-300 px-4 py-2">{{ $user->roleText() }}</td>
                                         <td class="border border-gray-300 px-4 py-2 text-center">
                                             <a href="{{ route('users.edit', $user) }}" class="text-blue-500 hover:underline">Edit</a> |
@@ -73,6 +73,10 @@
                                 @endforelse
                             </tbody>
                         </table>
+                    </div>
+                     <!-- Pagination Links -->
+                    <div class="mt-4">
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>

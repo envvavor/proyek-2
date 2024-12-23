@@ -156,6 +156,10 @@
                     <a href="{{ route('assignments.create') }}" class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
                         Buat Tugas
                     </a>
+                    <br>
+                    <a href="{{ route('submissions.indexAll') }}" class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
+                        Lihat Semua Submission
+                    </a>
                 </div>
             </div>
 

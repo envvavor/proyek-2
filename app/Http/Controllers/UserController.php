@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\ClassModel;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -10,19 +11,26 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $query = User::query();
+        $classes = ClassModel::all();
 
         // Filter berdasarkan role jika diberikan
         if ($request->filled('role')) {
             $query->where('role', $request->role);
         }
 
-        $users = $query->get();
-        return view('users.index', compact('users'));
+        // Menggunakan pagination dengan 10 item per halaman
+        $users = $query->paginate(5);
+
+        // Menambahkan parameter filter ke link pagination
+        $users->appends($request->all());
+
+        return view('users.index', compact('users', 'classes'));
     }
 
     public function create()
     {
-        return view('users.create');
+        $classes = ClassModel::all();  // Ambil semua kelas
+        return view('users.create', compact('classes'));
     }
 
     public function store(Request $request)
@@ -30,7 +38,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'kelas' => ['nullable', 'string', 'max:255'],
+            'class_id' => 'nullable|exists:classes,id',  // Validasi class_id
             'role' => ['required', 'integer', 'in:1,2,3'],  // Memperbaiki validasi
             'password' => 'required|min:8',
         ]);
@@ -38,7 +46,7 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'kelas' => $request->kelas,
+            'class_id' => $request->class_id,  // Menyimpan class_id
             'role' => $request->role,
             'password' => bcrypt($request->password),
         ]);
@@ -48,27 +56,25 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $classes = ClassModel::all();  // Ambil semua kelas
+        return view('users.edit', compact('user', 'classes'));
     }
 
     public function update(Request $request, User $user)
     {
-        // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-            'kelas' => ['nullable', 'string', 'max:255'],
-            'role' => ['required', 'integer', 'in:1,2,3'],  // Memperbaiki validasi
-            'password' => 'nullable|string|min:8|confirmed',  // Password adalah opsional
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'class_id' => 'nullable|exists:classes,id',
+            'role' => ['required', 'integer', 'in:1,2,3'],
+            'password' => 'nullable|min:8',
         ]);
 
-        // Perbarui data pengguna
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->kelas = $request->kelas;
+        $user->class_id = $request->class_id;
         $user->role = $request->role;
 
-        // Jika password baru diinputkan
         if ($request->filled('password')) {
             $user->password = bcrypt($request->password); // Hash password baru
         }

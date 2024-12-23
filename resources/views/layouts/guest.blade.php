@@ -16,9 +16,12 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gradient-to-t from-indigo-800 to-indigo-300">
-            <div>
-                <a href="/">
-                    <!-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> -->
+            <div class="absolute top-0 left-0 p-4">
+                <a href="/halamanutama">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6" /> <!-- Panah melengkung -->
+                        <path d="M9 12h12" />       <!-- Garis horizontal ke kanan -->
+                    </svg>
                 </a>
             </div>
 

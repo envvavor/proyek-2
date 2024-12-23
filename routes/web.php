@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\SubmissionController;
@@ -79,9 +80,35 @@ Route::get('subjects/{id}', [SubjectController::class, 'show'])->name('subjects.
 Route::get('/guru/dashboard', [SubjectController::class, 'index'])->name('guru.dashboard');
 Route::get('/guru/dashboard', [ClassController::class, 'index'])->name('guru.dashboard');
 
-Route::get('/murid/dashboard', [SubjectController::class, 'index'])->name('murid.dashboard');
+Route::get('/murid/dashboard', function () {
+    $subjects = app(SubjectController::class)->index()->getData()->subjects;
+    $pendingAssignmentsCount = app(SubmissionController::class)->countPendingAssignments();
+
+    return view('murid.dashboard', compact('subjects', 'pendingAssignmentsCount'));
+})->name('murid.dashboard');
 
 Route::get('classes/{id}', [ClassController::class, 'show'])->name('classes.show');
 
+
+Route::get('/submissions', [SubmissionController::class, 'index'])->name('submissions.index');
+Route::post('/submissions/{assignment}', [SubmissionController::class, 'store'])->name('submissions.store');
+Route::get('/submissions/all', [SubmissionController::class, 'indexAll'])->name('submissions.indexAll');
+
+Route::get('/submissions/file/{filename}', function ($filename) {
+    $path = 'private/public/submissions/' . $filename;
+
+    if (!Storage::exists($path)) {
+        abort(404);
+    }
+
+    return Storage::download($path);
+})->name('submissions.file');
+
+Route::get('/subjects', [SubjectController::class, 'list'])->name('subjects.index');
+Route::get('/subjects/create', [SubjectController::class, 'create'])->name('subjects.create');
+Route::post('/subjects', [SubjectController::class, 'store'])->name('subjects.store');
+Route::get('/subjects/{id}/edit', [SubjectController::class, 'edit'])->name('subjects.edit');
+Route::put('/subjects/{id}', [SubjectController::class, 'update'])->name('subjects.update');
+Route::delete('/subjects/{id}', [SubjectController::class, 'destroy'])->name('subjects.destroy');
 
 require __DIR__.'/auth.php';

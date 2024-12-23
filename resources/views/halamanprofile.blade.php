@@ -42,13 +42,22 @@ use Illuminate\Support\Facades\Route;
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
                 <a class="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="{{ asset('img/logotkj.png') }}" class="h-8" alt="Logo" />
-                    <span class="self-center text-1xl font-semibold whitespace-nowrap dark:text-white">TKJ SMKN 2 Indramayu</span>
+                    <span class="self-center text-1xl font-semibold whitespace-nowrap dark:text-white">TJKT SMKN 2 Indramayu</span>
                 </a>
                 <div class="flex items-center space-x-6 rtl:space-x-reverse">
-                    @if (Route::has('login'))
+                @if (Route::has('login'))
                         @auth
+                            @php
+                                $role = auth()->user()->role; // Ambil peran pengguna
+                                $dashboardUrl = match($role) {
+                                    1 => '/admin/dashboard', // Admin
+                                    2 => '/guru/dashboard',  // Guru
+                                    3 => '/murid/dashboard', // Murid
+                                    default => '/dashboard', // Default jika peran tidak dikenali
+                                };
+                            @endphp
                             <a
-                                href="{{ url('/dashboard') }}"
+                                href="{{ url($dashboardUrl) }}"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 text-center me-2 mb-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             >
                                 Dashboard
@@ -140,9 +149,9 @@ use Illuminate\Support\Facades\Route;
         class="bg-center bg-cover bg-no-repeat bg-gray-200 bg-blend-multiply h-screen w-full rounded-b-xl" 
         style="background-image: url('{{ asset('img/bg-awal.png') }}');">
         <div class="flex flex-col items-center justify-center px-4 mx-auto max-w-screen-xl text-center h-full animate-slide-up">
-            <img src="{{ asset('img/logotkj.png') }}" class="h-24 mx-auto mb-6 animate-slide-up-delay" alt="Logo" />
+            <img src="{{ asset('img/logotkj.png') }}" class="h-24 md:h-32 mx-auto mb-6 animate-slide-up-delay" alt="Logo" />
             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl animate-slide-up-delay">
-                Teknik Komputer & Jaringan
+                Teknik Jaringan Komputer dan Telekomunikasi
             </h1>
             <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48 animate-slide-up-delay">
                 SMK Negeri 2 Indramayu

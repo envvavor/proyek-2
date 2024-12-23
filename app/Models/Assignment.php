@@ -41,4 +41,15 @@ class Assignment extends Model
     {
         return $this->belongsTo(ClassModel::class);
     }
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
+    }
+
+    public function submissionByStudent($studentId)
+    {
+        return $this->submissions()->where('student_id', $studentId)->first();
+    }
+
 }

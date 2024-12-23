@@ -41,22 +41,27 @@ class AssignmentController extends Controller
 
     public function index(Request $request)
     {
-
         $subjects = Subject::all();
-        // Ambil ID mata pelajaran dari request (jika ada)
-        $subjectId = $request->get('subject_id');
+        $classes = ClassModel::all();
 
-        // Filter tugas berdasarkan mata pelajaran jika subject_id diberikan
+        // Ambil ID mata pelajaran dan kelas dari request (jika ada)
+        $subjectId = $request->get('subject_id');
+        $classId = $request->get('class_id');
+
+        // Filter tugas berdasarkan mata pelajaran dan kelas jika diberikan
         $assignments = Assignment::with(['class', 'subject'])
             ->when($subjectId, function ($query) use ($subjectId) {
                 $query->where('subject_id', $subjectId);
             })
-            ->get();
+            ->when($classId, function ($query) use ($classId) {
+                $query->where('class_id', $classId);
+            })
+            ->paginate(5);
 
-        // Ambil daftar semua mata pelajaran untuk dropdown filter
-        $subjects = Subject::all();
+        // Menambahkan parameter filter ke link pagination
+        $assignments->appends($request->all());
 
-        return view('assignments.index', compact('assignments', 'subjects', 'subjectId'));
+        return view('assignments.index', compact('assignments', 'subjects', 'classes', 'subjectId', 'classId'));
     }
 
     public function edit($id)
@@ -103,5 +108,5 @@ class AssignmentController extends Controller
         return view('assignments.index', compact('assignments', 'subject'));
     }
 
-        
+    
 }

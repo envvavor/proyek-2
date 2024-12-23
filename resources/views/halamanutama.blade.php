@@ -79,13 +79,22 @@ use Illuminate\Support\Facades\Route;
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
                 <a class="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="{{ asset('img/logotkj.png') }}" class="h-8" alt="Logo" />
-                    <span class="self-center text-1xl font-semibold whitespace-nowrap dark:text-white">TKJ SMKN 2 Indramayu</span>
+                    <span class="self-center text-1xl font-semibold whitespace-nowrap dark:text-white">TJKT SMKN 2 Indramayu</span>
                 </a>
                 <div class="flex items-center space-x-6 rtl:space-x-reverse">
                     @if (Route::has('login'))
                         @auth
+                            @php
+                                $role = auth()->user()->role; // Ambil peran pengguna
+                                $dashboardUrl = match($role) {
+                                    1 => '/admin/dashboard', // Admin
+                                    2 => '/guru/dashboard',  // Guru
+                                    3 => '/murid/dashboard', // Murid
+                                    default => '/dashboard', // Default jika peran tidak dikenali
+                                };
+                            @endphp
                             <a
-                                href="{{ url('/dashboard') }}"
+                                href="{{ url($dashboardUrl) }}"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 text-center me-2 mb-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                             >
                                 Dashboard
@@ -189,9 +198,9 @@ use Illuminate\Support\Facades\Route;
         class="bg-center bg-cover bg-no-repeat bg-gray-200 bg-blend-multiply h-screen w-full rounded-b-xl" 
         style="background-image: url('{{ asset('img/bg-awal.png') }}');">
         <div class="flex flex-col items-center justify-center px-4 mx-auto max-w-screen-xl text-center h-full animate-slide-up">
-            <img src="{{ asset('img/logotkj.png') }}" class="h-24 mx-auto mb-6 animate-slide-up-delay" alt="Logo" />
+            <img src="{{ asset('img/logotkj.png') }}" class="h-24 md:h-32 mx-auto mb-6 animate-slide-up-delay" alt="Logo" />
             <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl animate-slide-up-delay">
-                Teknik Komputer & Jaringan
+                Teknik Jaringan Komputer dan Telekomunikasi
             </h1>
             <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48 animate-slide-up-delay">
                 SMK Negeri 2 Indramayu
@@ -245,44 +254,44 @@ use Illuminate\Support\Facades\Route;
             <div class="flex space-x-6 p-6"> <!-- Spasi antar card lebih besar -->
                 <!-- Card 1 -->
                 <div class="min-w-[300px] bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
-                    <img src="{{ asset('img/bg-awal.png') }}" alt="Card 1" class="w-full h-48 object-cover rounded-lg mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Card 1</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Description of card 1.</p>
+                    <img src="{{ asset('img/image1.png') }}" alt="Card 1" class="w-full h-48 object-cover rounded-lg mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Ketua Program Keahlian TKJ</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Alhamdulilllah, dengan mengucapkan puji dan syukur kehadirat Allah SWT, atas terbitnya web resmi SMK Negeri 2 Indramayu. Dengan hadirnya web ini diharapkan....</p>
                 </div>
 
                 <!-- Card 2 -->
                 <div class="min-w-[300px] bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
-                    <img src="{{ asset('img/bg-awal.png') }}" alt="Card 2" class="w-full h-48 object-cover rounded-lg mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Card 2</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Description of card 2.</p>
+                    <img src="{{ asset('img/image2.png') }}" alt="Card 2" class="w-full h-48 object-cover rounded-lg mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Presentasi Ujikom</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Presentasi Uji Kompetensi menampilkan hasil proyek berupa penjelasan tujuan, fitur utama, teknologi yang digunakan, dan proses pengerjaan, sebagai bukti kemampuan keahlian yang telah dikuasai.</p>
                 </div>
 
                 <!-- Card 3 -->
                 <div class="min-w-[300px] bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
-                    <img src="{{ asset('img/bg-awal.png') }}" alt="Card 3" class="w-full h-48 object-cover rounded-lg mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Card 3</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Description of card 3.</p>
+                    <img src="{{ asset('img/image3.png') }}" alt="Card 3" class="w-full h-48 object-cover rounded-lg mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Laboratorium Ujikom</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Laboratorium Ujikom adalah ruang praktik untuk melaksanakan Uji Kompetensi, dilengkapi dengan fasilitas dan perangkat yang mendukung pengujian keahlian siswa secara profesional.</p>
                 </div>
 
                 <!-- Card 4 -->
                 <div class="min-w-[300px] bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
-                    <img src="{{ asset('img/bg-awal.png') }}" alt="Card 1" class="w-full h-48 object-cover rounded-lg mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Card 4</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Description of card 1.</p>
+                    <img src="{{ asset('img/image4.png') }}" alt="Card 1" class="w-full h-48 object-cover rounded-lg mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Adminitstrasi Jaringan</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Administrasi Jaringan mencakup pengelolaan, konfigurasi, dan pemeliharaan jaringan komputer untuk memastikan koneksi, keamanan, dan kinerja sistem berjalan optimal.</p>
                 </div>
 
                 <!-- Card 5 -->
                 <div class="min-w-[300px] bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
-                    <img src="{{ asset('img/bg-awal.png') }}" alt="Card 2" class="w-full h-48 object-cover rounded-lg mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Card 5</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Description of card 2.</p>
+                    <img src="{{ asset('img/image5.png') }}" alt="Card 2" class="w-full h-48 object-cover rounded-lg mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Ujikom Pengkabelan</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Ujikom Pengkabelan menguji kemampuan peserta dalam merancang, memasang, dan mengkonfigurasi kabel jaringan dengan standar yang tepat untuk memastikan konektivitas yang optimal.</p>
                 </div>
 
                 <!-- Card 6 -->
                 <div class="min-w-[300px] bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
-                    <img src="{{ asset('img/bg-awal.png') }}" alt="Card 3" class="w-full h-48 object-cover rounded-lg mb-6">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Card 6</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Description of card 3.</p>
+                    <img src="{{ asset('img/image6.jpg') }}" alt="Card 3" class="w-full h-48 object-cover rounded-lg mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-white">Ujikom Server</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Ujikom Server menguji kemampuan peserta dalam instalasi, konfigurasi, dan manajemen server untuk memastikan layanan jaringan berjalan stabil dan sesuai kebutuhan.</p>
                 </div>
             </div>
         </div>
@@ -293,11 +302,11 @@ use Illuminate\Support\Facades\Route;
             <!-- Card 1 -->
             <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/bg-awal.png') }}"/>
+                    <img class="rounded-t-lg" src="{{ asset('img/image7.jpg') }}"/>
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Judul Kartu</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Berita Terkini</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam fugiat, amet voluptatibus non debitis aliquam soluta suscipit atque beatae maxime similique. Quisquam maxime pariatur repellat, quasi asperiores reiciendis exercitationem nihil.</p>
                     <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -312,11 +321,11 @@ use Illuminate\Support\Facades\Route;
             <!-- Card 2 -->
             <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/bg-awal.png') }}"/>
+                    <img class="rounded-t-lg" src="{{ asset('img/image8.jpg') }}"/>
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Judul Kartu</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Berita Terkini</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam fugiat, amet voluptatibus non debitis aliquam soluta suscipit atque beatae maxime similique. Quisquam maxime pariatur repellat, quasi asperiores reiciendis exercitationem nihil.</p>
                     <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -331,11 +340,67 @@ use Illuminate\Support\Facades\Route;
             <!-- Card 3 -->
             <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/bg-awal.png') }}"/>
+                    <img class="rounded-t-lg" src="{{ asset('img/image9.jpg') }}"/>
                 </a>
                 <div class="p-5">
                     <a href="#">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Judul Kartu</h5>
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Berita Terkini</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam fugiat, amet voluptatibus non debitis aliquam soluta suscipit atque beatae maxime similique. Quisquam maxime pariatur repellat, quasi asperiores reiciendis exercitationem nihil.</p>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <!-- Card 1 -->
+            <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ asset('img/image7.jpg') }}"/>
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Berita Terkini</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam fugiat, amet voluptatibus non debitis aliquam soluta suscipit atque beatae maxime similique. Quisquam maxime pariatur repellat, quasi asperiores reiciendis exercitationem nihil.</p>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ asset('img/image8.jpg') }}"/>
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Berita Terkini</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam fugiat, amet voluptatibus non debitis aliquam soluta suscipit atque beatae maxime similique. Quisquam maxime pariatur repellat, quasi asperiores reiciendis exercitationem nihil.</p>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="max-w-sm bg-white border border-gray-800 rounded-lg shadow">
+                <a href="#">
+                    <img class="rounded-t-lg" src="{{ asset('img/image9.jpg') }}"/>
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Berita Terkini</h5>
                     </a>
                     <p class="mb-3 font-normal text-gray-700">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laboriosam fugiat, amet voluptatibus non debitis aliquam soluta suscipit atque beatae maxime similique. Quisquam maxime pariatur repellat, quasi asperiores reiciendis exercitationem nihil.</p>
                     <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
