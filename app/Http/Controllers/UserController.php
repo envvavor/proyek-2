@@ -93,7 +93,13 @@ class UserController extends Controller
 
     public function hitung()
     {
-        $userCount = User::count(); // Jumlah user
-        return view('admin.dashboard', compact('userCount'));
+        return User::count();
+    }
+
+    public function dashboard()
+    {
+        $notifications = auth()->user()->notifications;
+
+        return view('murid.dashboard', compact('notifications'));
     }
 }

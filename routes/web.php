@@ -65,7 +65,13 @@ Route::get('/halamangaleri', function () {
 
 Route::resource('users', UserController::class)->middleware(['auth']);
 
-Route::get('/admin/dashboard', [UserController::class, 'hitung'])->name('admin.dashboard');
+Route::get('/admin/dashboard', function () {
+    $userCount = app(UserController::class)->hitung();
+    $assignmentCount = app(AssignmentController::class)->count();
+    $submissionCount = app(SubmissionController::class)->count();
+
+    return view('admin.dashboard', compact('userCount', 'assignmentCount', 'submissionCount'));
+})->name('admin.dashboard');
 
 Route::get('/assignments/create', [AssignmentController::class, 'create'])->name('assignments.create');
 Route::post('/assignments', [AssignmentController::class, 'store'])->name('assignments.store');
@@ -83,8 +89,9 @@ Route::get('/guru/dashboard', [ClassController::class, 'index'])->name('guru.das
 Route::get('/murid/dashboard', function () {
     $subjects = app(SubjectController::class)->index()->getData()->subjects;
     $pendingAssignmentsCount = app(SubmissionController::class)->countPendingAssignments();
+    $notifications = auth()->user()->notifications;
 
-    return view('murid.dashboard', compact('subjects', 'pendingAssignmentsCount'));
+    return view('murid.dashboard', compact('subjects', 'pendingAssignmentsCount', 'notifications'));
 })->name('murid.dashboard');
 
 Route::get('classes/{id}', [ClassController::class, 'show'])->name('classes.show');

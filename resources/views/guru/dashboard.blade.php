@@ -145,28 +145,29 @@
                     </span> -->
                 </div>
 
-                <div class="flex-1 bg-blue-100 border border-blue-200 rounded-xl p-6 animate-fade-in">
-                    <!-- <h2 class="text-4xl md:text-5xl text-blue-900">
-                        Tugas Terkumpul<br><strong>2</strong>
-                    </h2> -->
-                    <a href="{{ route('assignments.index') }}" class="inline-block px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
-                        Lihat Semua Tugas
-                    </a>
-                    <br>
-                    <a href="{{ route('assignments.create') }}" class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
-                        Buat Tugas
-                    </a>
-                    <br>
-                    <a href="{{ route('submissions.indexAll') }}" class="inline-block mt-8 px-8 py-2 rounded-full text-xl font-bold text-white bg-blue-800 hover:bg-blue-900 transition-transform duration-300 hover:scale-105">
-                        Lihat Semua Submission
-                    </a>
+                <div class="flex-1 bg-gradient-to-r from-blue-100 via-blue-200 to-blue-300 border border-blue-300 rounded-xl p-6 shadow-lg transform hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="space-y-4">
+                            <a href="{{ route('assignments.index') }}" class="block px-6 py-3 rounded-full text-lg font-bold text-white bg-blue-600 hover:bg-blue-700 hover:-translate-y-1 transform transition-transform duration-300 shadow-md">
+                                Lihat Semua Tugas
+                            </a>
+                            <a href="{{ route('assignments.create') }}" class="block px-6 py-3 rounded-full text-lg font-bold text-white bg-green-600 hover:bg-green-700 hover:-translate-y-1 transform transition-transform duration-300 shadow-md">
+                                Buat Tugas Baru
+                            </a>
+                            <a href="{{ route('submissions.indexAll') }}" class="block px-6 py-3 rounded-full text-lg font-bold text-white bg-indigo-600 hover:bg-indigo-700 hover:-translate-y-1 transform transition-transform duration-300 shadow-md">
+                                Lihat Semua Submission
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($classes as $class)
-                    <div class="bg-gradient-to-b from-indigo-100 to-indigo-800 rounded-xl shadow-lg p-6 h-64 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up" style="animation-delay: 0.1s">
-                        <a href="{{ route('classes.show', $class->id) }}" class="text-xl font-bold text-indigo-800 hover:text-white hover:border-solid">Kelas : {{ $class->name }}</a>
+                    <div class="bg-gradient-to-b from-indigo-100 to-indigo-800 rounded-xl shadow-lg p-6 h-64 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl animate-slide-up" style="animation-delay: {{ $loop->index * 0.1 }}s">
+                        <a href="{{ route('classes.show', $class->id) }}" class="block text-xl font-bold text-indigo-800 hover:text-white transition-colors duration-300">
+                            Kelas {{ $class->name }}
+                        </a>
                     </div>
                 @endforeach
             </div>

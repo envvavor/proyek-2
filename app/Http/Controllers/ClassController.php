@@ -29,5 +29,59 @@ class ClassController extends Controller
         return view('classes.show', compact('class', 'assignments', 'subjects'));
     }
 
+    public function indexAll()
+    {
+        $classes = ClassModel::all();
+
+        return view('classes.indexAll', compact('classes'));
+    }
+
+    public function create()
+    {
+        return view('classes.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        ClassModel::create($request->all());
+
+        return redirect()->route('classes.indexAll')->with('success', 'Kelas berhasil dibuat.');
+    }
+
+    public function edit($id)
+    {
+        $class = ClassModel::findOrFail($id);
+
+        return view('classes.edit', compact('class'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $class = ClassModel::findOrFail($id);
+        $class->update($request->all());
+
+        return redirect()->route('classes.indexAll')->with('success', 'Kelas berhasil diubah.');
+    }
+
+    public function destroy($id)
+    {
+        $class = ClassModel::findOrFail($id);
+        $class->delete();
+
+        return redirect()->route('classes.indexAll')->with('success', 'Kelas berhasil dihapus.');
+    }
+
+    public function count()
+    {
+        return ClassModel::count();
+    }
 
 }

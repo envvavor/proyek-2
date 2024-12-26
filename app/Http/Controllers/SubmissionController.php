@@ -105,4 +105,9 @@ class SubmissionController extends Controller
 
         return redirect()->route('submissions.index')->with('success', 'Submission deleted successfully.');
     }
+
+    public function count()
+    {
+        return Submission::count();
+    }
 }

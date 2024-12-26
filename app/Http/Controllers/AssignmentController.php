@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\User;
+use App\Notifications\NewAssignmentNotification;
 use App\Models\Assignment;
 use App\Models\ClassModel; // Model untuk tabel classes
 use App\Models\Subject;    // Model untuk tabel subjects
@@ -27,16 +29,18 @@ class AssignmentController extends Controller
             'due_date' => 'required|date',
         ]);
 
-        Assignment::create([
-            'teacher_id' => auth()->id(),
-            'class_id' => $validated['class_id'],
-            'subject_id' => $validated['subject_id'],
-            'title' => $validated['title'],
-            'description' => $validated['description'],
-            'due_date' => $validated['due_date'],
-        ]);
+        // Tambahkan teacher_id ke dalam data yang divalidasi
+        $validated['teacher_id'] = auth()->user()->id;
 
-        return redirect()->route('assignments.index')->with('success', 'Tugas berhasil dibuat');
+        $assignment = Assignment::create($validated);
+
+        // Kirim notifikasi ke murid di kelas tertentu
+        $students = User::where('class_id', $validated['class_id'])->get();
+        foreach ($students as $student) {
+            $student->notify(new NewAssignmentNotification($assignment));
+        }
+
+        return redirect()->route('assignments.index')->with('success', 'Tugas berhasil dibuat dan notifikasi dikirim.');
     }
 
     public function index(Request $request)
@@ -108,5 +112,9 @@ class AssignmentController extends Controller
         return view('assignments.index', compact('assignments', 'subject'));
     }
 
+    public function count()
+    {
+        return Assignment::count();
+    }
     
 }
