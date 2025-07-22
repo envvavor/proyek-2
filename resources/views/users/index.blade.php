@@ -29,6 +29,10 @@
                         Create Users
                     </a>
 
+                    <a href="{{ url('/export-users') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        Export Excel
+                    </a>
+
                     <!-- Tabel User -->
                     <div class="overflow-x-auto">
                         <table class="table-auto w-full border-collapse border border-gray-300">

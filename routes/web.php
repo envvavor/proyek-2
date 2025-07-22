@@ -96,7 +96,6 @@ Route::get('/murid/dashboard', function () {
 
 Route::get('classes/{id}', [ClassController::class, 'show'])->name('classes.show');
 
-
 Route::get('/submissions', [SubmissionController::class, 'index'])->name('submissions.index');
 Route::post('/submissions/{assignment}', [SubmissionController::class, 'store'])->name('submissions.store');
 Route::get('/submissions/all', [SubmissionController::class, 'indexAll'])->name('submissions.indexAll');
@@ -119,3 +118,6 @@ Route::put('/subjects/{id}', [SubjectController::class, 'update'])->name('subjec
 Route::delete('/subjects/{id}', [SubjectController::class, 'destroy'])->name('subjects.destroy');
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/export-users', [UserController::class, 'export']);
